@@ -13,7 +13,11 @@ class Customer extends Model
     
     protected $table = "customers";
     
-    public function items() {
+    public function guests() {
         return $this->hasMany('App\Customer\Guest', 'id', 'customer_id');
+    }
+    
+    public function contacts() {
+        return $this->hasMany('App\Customer\Contact', 'id', 'customer_id');
     }
 }

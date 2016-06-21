@@ -12,4 +12,8 @@ class Source extends Model
     use SoftDeletes, Owner;
     
     protected $table = "sources";
+    
+    public function contacts() {
+        return $this->hasMany("App\Source\Contact", "id", "source_id");
+    }
 }

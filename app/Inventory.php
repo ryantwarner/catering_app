@@ -12,4 +12,8 @@ class Inventory extends Model
     use SoftDeletes, Owner;
     
     protected $table = "inventories";
+    
+    public function items() {
+        return $this->hasMany('App\Inventory\Item', 'id', 'inventory_id');
+    }
 }

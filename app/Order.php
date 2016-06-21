@@ -12,4 +12,8 @@ class Order extends Model
     use SoftDeletes, Owner;
     
     protected $table = "orders";
+    
+    public function items() {
+        return $this->hasMany('App\Order\Item', 'id', 'order_id');
+    }
 }

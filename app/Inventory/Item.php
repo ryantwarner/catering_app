@@ -16,4 +16,8 @@ class Item extends Model
     public function inventory() {
         return $this->belongsTo('App\Inventory', 'inventory_id', 'id');
     }
+    
+    public function source() {
+        return $this->hasOne('App\Source', 'id', 'source_id');
+    }
 }

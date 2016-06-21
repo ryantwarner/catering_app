@@ -13,4 +13,11 @@ class Contact extends Model
     
     protected $table = "contacts";
     
+    public function source() {
+        return $this->belongsTo('App\Source\Contact', 'contact_id', 'id');
+    }
+    
+    public function customer() {
+        return $this->belongsTo('App\Customer\Contact', 'contact_id', 'id');
+    }
 }
