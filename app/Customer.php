@@ -1,0 +1,19 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+use App\Traits\Owner;
+
+class Customer extends Model
+{
+    use SoftDeletes, Owner;
+    
+    protected $table = "customers";
+    
+    public function items() {
+        return $this->hasMany('App\Customer\Guest', 'id', 'customer_id');
+    }
+}
