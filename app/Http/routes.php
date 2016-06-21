@@ -12,8 +12,5 @@
 */
 
 Route::get('/', function () {
-    $user = \App\User::all()->random();
-    \Symfony\Component\VarDumper\VarDumper::dump($user);
-    exit;
-//    return view('welcome');
+    return view('welcome');
 });
