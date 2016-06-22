@@ -167,7 +167,7 @@ $factory->define(App\Recipe\Nutrition::class, function (Faker\Generator $faker) 
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
     return [
         'customer_id' => App\Customer::all()->random()->id,
-        'status' => $faker->randomElement('open','closed','cancelled','in_progress','complete','invoiced','paid','arrears'),
+        'status' => $faker->randomElement(['open','closed','cancelled','in_progress','complete','invoiced','paid','arrears']),
         'created_by' => App\User::all()->random()->id
     ];
 });
@@ -198,10 +198,19 @@ $factory->define(App\Customer\Guest::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Customer\Contact::class, function(Faker\Generator $faker) {
+$factory->define(App\Customer\Guest\Contact::class, function(Faker\Generator $faker) {
     return [
         'contact_id' => App\Contact::all()->random()->id,
         'guest_id' => App\Customer\Guest::all()->random()->id,
+        'created_by' => App\User::all()->random()->id
+    ];
+});
+
+$factory->define(App\Customer\Guest\DietaryRestriction::class, function(Faker\Generator $faker) {
+    return [
+        'guest_id' => App\Customer\Guest::all()->random()->id,
+        'item_type_id' => App\ItemType::all()->random()->id,
+        'restriction_note' => $faker->sentence(),
         'created_by' => App\User::all()->random()->id
     ];
 });

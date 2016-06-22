@@ -11,11 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        
         $this->call(UsersTableSeeder::class);
-        $this->call(CustomerSeeder::class);
-        $this->call(SourceSeeder::class);
-        $this->call(InventorySeeder::class);
-        $this->call(ContactSeeder::class);
         
         DB::table('item_types')->insert([
             ['name' => 'vegetable', 'created_by' => App\User::all()->random()->id], 
@@ -46,7 +43,13 @@ class DatabaseSeeder extends Seeder
             ['name' => 'units', 'created_by' => App\User::all()->random()->id]
         ]);
         
+        $this->call(ContactSeeder::class);
+        $this->call(CustomerSeeder::class);
+        $this->call(SourceSeeder::class);
+        $this->call(InventorySeeder::class);
         $this->call(RecipeSeeder::class);
         $this->call(MenuSeeder::class);
+        $this->call(GuestSeeder::class);
+        $this->call(OrderSeeder::class);
     }
 }

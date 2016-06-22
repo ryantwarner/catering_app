@@ -40,7 +40,7 @@ class CreateCustomerTables extends Migration
         Schema::create('guest_dietary_restrictions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('guest_id')->unsigned();
-            $table->integer('item_type_id')->unsigned();
+            $table->integer('item_type_id')->unsigned()->nullable();
             $table->string('restriction_note')->nullable();
             $table->integer('created_by')->unsigned();
             $table->timestamps();

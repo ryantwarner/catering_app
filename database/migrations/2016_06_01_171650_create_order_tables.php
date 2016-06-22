@@ -42,7 +42,7 @@ class CreateOrderTables extends Migration
             $table->integer('order_id')->unsigned();
             $table->integer('guest_id')->unsigned()->nullable();
             $table->integer('menu_item_id')->unsigned();
-            $table->text('notes')->nullable();
+            $table->text('note')->nullable();
             
             $table->integer('created_by')->unsigned();
             $table->timestamps();

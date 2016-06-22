@@ -12,5 +12,6 @@ class InventorySeeder extends Seeder
     public function run()
     {
         factory(App\Inventory::class, 10)->create();
+        factory(App\Inventory\Item::class, 10)->create();
     }
 }
