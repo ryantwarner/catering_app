@@ -16,4 +16,8 @@ class Contact extends Model
     public function guest() {
         return $this->belongsTo('App\Customer\Guest', 'guest_id', 'id');
     }
+    
+    public function contact() {
+        return $this->hasOne('App\Contact', 'id', 'contact_id');
+    }
 }

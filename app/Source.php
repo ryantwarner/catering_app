@@ -14,6 +14,6 @@ class Source extends Model
     protected $table = "sources";
     
     public function contacts() {
-        return $this->hasMany("App\Source\Contact", "id", "source_id");
+        return $this->hasMany("App\Source\Contact", "source_id", "id");
     }
 }

@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('order/status/{status}', ['as' => 'order.bystatus', 'uses' => 'OrderController@byStatus']);
+Route::get('order/customer/{id}', ['as' => 'order.bycustomer', 'uses' => 'OrderController@byCustomer']);
+Route::resource('order', 'OrderController');

@@ -18,6 +18,6 @@ class Item extends Model
     }
     
     public function source() {
-        return $this->hasOne('App\Source', 'id', 'source_id');
+        return $this->hasOne('App\Source', 'source_id', 'id');
     }
 }

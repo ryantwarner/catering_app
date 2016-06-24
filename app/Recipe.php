@@ -14,14 +14,14 @@ class Recipe extends Model
     protected $table = "recipes";
     
     public function ingredients() {
-        return $this->hasMany("App\Recipe\Ingredient", "id", "recipe_id");
+        return $this->hasMany("App\Recipe\Ingredient", "recipe_id", "id");
     }
     
     public function instructions() {
-        return $this->hasMany("App\Recipe\Instruction", "id", "recipe_id");
+        return $this->hasMany("App\Recipe\Instruction", "recipe_id", "id");
     }
     
     public function nutrition() {
-        return $this->hasOne("App\Recipe\Nutrition", "id", "recipe_id");
+        return $this->hasOne("App\Recipe\Nutrition", "recipe_id", "id");
     }
 }

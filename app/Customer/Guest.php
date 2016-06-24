@@ -18,10 +18,10 @@ class Guest extends Model
     }
     
     public function dietary_restrictions() {
-        return $this->hasMany('App\Customer\Guest\DietaryRestriction', 'id', 'guest_id');
+        return $this->hasMany('App\Customer\Guest\DietaryRestriction', 'guest_id', 'id');
     }
     
     public function contact() {
-        return $this->hasOne('App\Customer\Guest\Contact', 'id', 'guest_id');
+        return $this->hasOne('App\Customer\Guest\Contact', 'guest_id', 'id');
     }
 }

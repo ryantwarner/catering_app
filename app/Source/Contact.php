@@ -18,6 +18,6 @@ class Contact extends Model
     }
     
     public function contact() {
-        return $this->hasOne('App\Contact', 'id', 'contact_id');
+        return $this->hasOne('App\Contact', 'contact_id', 'id');
     }
 }

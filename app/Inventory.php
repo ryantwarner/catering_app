@@ -14,6 +14,6 @@ class Inventory extends Model
     protected $table = "inventories";
     
     public function items() {
-        return $this->hasMany('App\Inventory\Item', 'id', 'inventory_id');
+        return $this->hasMany('App\Inventory\Item', 'inventory_id', 'id');
     }
 }

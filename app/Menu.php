@@ -14,6 +14,6 @@ class Menu extends Model
     protected $table = "menus";
     
     public function items() {
-        return $this->hasMany('App\Menu\Item', 'id', 'menu_id');
+        return $this->hasMany('App\Menu\Item', 'menu_id', 'id');
     }
 }
