@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('order', 'OrderController');
 Route::get('order/status/{status}', ['as' => 'order.bystatus', 'uses' => 'OrderController@byStatus']);
 Route::get('order/customer/{id}', ['as' => 'order.bycustomer', 'uses' => 'OrderController@byCustomer']);
-Route::resource('order', 'OrderController');
+
+Route::resource('menu', 'MenuController');
+
+Route::resource('recipe', 'RecipeController');
+
+Route::resource('recipe/ingredient', 'Recipe\IngredientController');
+Route::resource('recipe/instruction', 'Recipe\InstructionController');
+Route::resource('recipe/nutrition', 'Recipe\NutritionController');
