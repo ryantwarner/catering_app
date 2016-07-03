@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Menu;
+namespace App\Http\Controllers\Order;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Menu\Item;
+use App\Order\Item;
 
 class ItemController extends Controller
 {
@@ -33,10 +33,10 @@ class ItemController extends Controller
     }
     
     public function show($id) {
-        return response()->json(Item::with(['menu'])->findOrFail($id));
+        return response()->json(Item::findOrFail($id));
     }
     
     public function edit($id) {
-        return response()->json(Item::with(['menu'])->findOrFail($id));
+        return response()->json(Item::findOrFail($id));
     }
 }

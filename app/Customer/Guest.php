@@ -22,6 +22,6 @@ class Guest extends Model
     }
     
     public function contact() {
-        return $this->hasOne('App\Customer\Guest\Contact', 'guest_id', 'id');
+        return $this->hasOne('App\Customer\Guest\Contact', 'id', 'guest_id');
     }
 }
