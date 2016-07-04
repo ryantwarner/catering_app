@@ -8,10 +8,14 @@ use App\Http\Requests;
 
 use Illuminate\Support\Facades\Input;
 
+use App\Traits\ResolvesResponse;
+
 use App\Order;
 
 class OrderController extends Controller
 {
+    use ResolvesResponse;
+    
     public function store(Request $request) {
         $order = new Order();
         if ($order->validate($request->input())) {
@@ -51,10 +55,12 @@ class OrderController extends Controller
     }
     
     public function show(Request $request, $id) {
-        return response()->json(Order::with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->findOrFail($id));
+        $order = Order::with(['customer', 'items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->findOrFail($id);
+        return $this->resolve_response($request, $order);
     }
     
     public function edit(Request $request, $id) {
-        return response()->json(Order::with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->findOrFail($id));
+        $order = Order::with(['customer', 'items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->findOrFail($id);
+        return $this->resolve_response($request, $order);
     }
 }

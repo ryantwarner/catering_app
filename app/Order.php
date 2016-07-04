@@ -29,4 +29,8 @@ class Order extends Model
     public function notes() {
         return $this->hasMany('App\Order\Note', 'order_id', 'id');
     }
+    
+    public function customer() {
+        return $this->hasOne('App\Customer', 'id', 'customer_id');
+    }
 }
