@@ -47,6 +47,7 @@ class OrderController extends Controller
     
     public function update(Request $request, $id) {
         $order = Order::findOrFail($id);
+        
         if ($order->validate($request->input())) {
             return response()->json($order->update($request->input()));
         } else {

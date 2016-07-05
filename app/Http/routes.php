@@ -15,32 +15,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('orders', 'OrderController');
-Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);
-Route::get('orders/customer/{id}', ['as' => 'orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
+Route::group(['middleware' => ['auth']], function() {
 
-Route::resource('contacts', 'ContactController');
+     Route::resource('orders', 'OrderController');
+    Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);
+    Route::get('orders/customer/{id}', ['as' => 'orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
 
-Route::resource('customers/guests/contacts', 'Customer\Guest\ContactController');
-Route::resource('customers/guests/dietaryrestrictions', 'Customer\Guest\DietaryRestrictionController');
-Route::resource('customers/guests', 'Customer\GuestController');
-Route::resource('customers/contacts', 'Customer\ContactController');
-Route::resource('customers', 'CustomerController');
+    Route::resource('contacts', 'ContactController');
 
-Route::resource('inventories/items', 'Inventory\ItemController');
-Route::resource('inventories', 'InventoryController');
+    Route::resource('customers/guests/contacts', 'Customer\Guest\ContactController');
+    Route::resource('customers/guests/dietaryrestrictions', 'Customer\Guest\DietaryRestrictionController');
+    Route::resource('customers/guests', 'Customer\GuestController');
+    Route::resource('customers/contacts', 'Customer\ContactController');
+    Route::resource('customers', 'CustomerController');
 
-Route::resource('menus/items', 'Menu\ItemController');
-Route::resource('menus', 'MenuController');
+    Route::resource('inventories/items', 'Inventory\ItemController');
+    Route::resource('inventories', 'InventoryController');
 
-Route::resource('orders/items', 'Order\ItemController');
-Route::resource('orders/notes', 'Order\NoteController');
-Route::resource('orders', 'OrderController');
+    Route::resource('menus/items', 'Menu\ItemController');
+    Route::resource('menus', 'MenuController');
 
-Route::resource('recipes/ingredients', 'Recipe\IngredientController');
-Route::resource('recipes/instructions', 'Recipe\InstructionController');
-Route::resource('recipes/nutrition', 'Recipe\NutritionController');
-Route::resource('recipes', 'RecipeController');
+    Route::resource('orders/items', 'Order\ItemController');
+    Route::resource('orders/notes', 'Order\NoteController');
+    Route::resource('orders', 'OrderController');
 
-Route::resource('sources/contacts', 'Source\ContactController');
-Route::resource('sources', 'SourceController');
+    Route::resource('recipes/ingredients', 'Recipe\IngredientController');
+    Route::resource('recipes/instructions', 'Recipe\InstructionController');
+    Route::resource('recipes/nutrition', 'Recipe\NutritionController');
+    Route::resource('recipes', 'RecipeController');
+
+    Route::resource('sources/contacts', 'Source\ContactController');
+    Route::resource('sources', 'SourceController');
+    
+});
