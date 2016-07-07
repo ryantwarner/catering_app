@@ -36,8 +36,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('menus/items', 'Menu\ItemController');
     Route::resource('menus', 'MenuController');
 
-    Route::get('orders/{id}/items', 'Order\ItemController@byOrder');
-    Route::resource('orders/items', 'Order\ItemController');
+//    Route::get('orders/{id}/items', 'Order\ItemController@byOrder');
+    Route::resource('orders/{id}/items', 'Order\ItemController');
     Route::get('orders/{id}/notes', 'Order\NoteController@byOrder');
     Route::resource('orders/notes', 'Order\NoteController');
     Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);

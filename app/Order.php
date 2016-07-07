@@ -18,7 +18,7 @@ class Order extends Model
     
     protected $rules = [
         'customer_id' => 'required|integer',
-        'status' => 'required|in:closed,paid,arrears,invoiced,open',
+        'status' => 'required|in:open,closed,cancelled,in_progress,complete,invoiced,paid,arrears',
         'created_by' => 'required|integer'
     ];
     

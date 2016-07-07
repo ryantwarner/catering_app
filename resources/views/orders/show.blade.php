@@ -18,6 +18,7 @@ Items:
 @empty
 <li>No items</li>
 @endforelse
+<li><a href="{{ url('orders/' . $data->id . "/items/create") }}">Add Item</a></li>
 </ul>
 Notes:
 <ul>
@@ -28,6 +29,7 @@ Notes:
 @empty
 <li>No notes</li>
 @endforelse
+<li><a href="{{ url('') }}">Add Note</a></li>
 </ul>
 
 <a href="{!! url('orders/'.$data->id.'/edit') !!}">Edit Order</a>

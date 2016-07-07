@@ -19,9 +19,10 @@ class OrderController extends Controller
     public function store(Request $request) {
         $order = new Order();
         if ($order->validate($request->input())) {
-            return response()->json($order->fill($request->input())->save());
+            $saved_order = Order::create($request->input());
+            return $request->header('Accept') != 'application/json' ? redirect('orders/' . $saved_order->id) : response()->json($saved_order);
         } else {
-            return response()->json($order->errors());
+            return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($order->errors()) : response()->json($order->errors());
         }
     }
     
@@ -37,8 +38,8 @@ class OrderController extends Controller
         return $this->resolve_response($request, Order::where(['customer_id' => $request->id])->with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->get());
     }
     
-    public function create() {
-        return response()->json(new Order());
+    public function create(Request $request) {
+        return $this->resolve_response($request, new Order());
     }
     
     public function destroy(Request $request, $id) {

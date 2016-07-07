@@ -24,8 +24,8 @@ class ItemController extends Controller
         return response()->json(Item::all());
     }
     
-    public function create() {
-        return response()->json(new Item());
+    public function create(Request $request) {
+        return $this->resolve_response($request, new Item());
     }
     
     public function destroy($id) {
