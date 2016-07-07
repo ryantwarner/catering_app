@@ -9,8 +9,12 @@ use App\Http\Controllers\Controller;
 
 use App\Order\Item;
 
+use App\Traits\ResolvesResponse;
+
 class ItemController extends Controller
 {
+    use ResolvesResponse;
+    
     public function store() {
         $item = new Item(Input::all());
         return response()->json($item->save());
@@ -38,5 +42,9 @@ class ItemController extends Controller
     
     public function edit($id) {
         return response()->json(Item::findOrFail($id));
+    }
+    
+    public function byOrder(Request $request) {
+        return $this->resolve_response($request, Item::where('order_id', $request->id)->get());
     }
 }

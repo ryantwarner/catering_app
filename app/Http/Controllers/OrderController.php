@@ -25,8 +25,8 @@ class OrderController extends Controller
         }
     }
     
-    public function index() {
-        return response()->json(Order::all());
+    public function index(Request $request) {
+        return $this->resolve_response($request, Order::whereNotIn('status', ['closed','cancelled','complete','paid'])->groupBy('customer_id')->get());
     }
     
     public function byStatus(Request $request) {
@@ -34,7 +34,7 @@ class OrderController extends Controller
     }
     
     public function byCustomer(Request $request) {
-        return response()->json(Order::where(['customer_id' => $request->id])->with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->get());
+        return $this->resolve_response($request, Order::where(['customer_id' => $request->id])->with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->get());
     }
     
     public function create() {
@@ -56,7 +56,7 @@ class OrderController extends Controller
     }
     
     public function show(Request $request, $id) {
-        $order = Order::with(['customer', 'items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->findOrFail($id);
+        $order = Order::with(['customer', 'items', 'items.menu_item', 'items.guest', 'items.guest.contact', 'items.guest.contact.contact', 'notes'])->findOrFail($id);
         return $this->resolve_response($request, $order);
     }
     

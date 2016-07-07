@@ -22,10 +22,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
 
 Route::group(['middleware' => ['auth']], function() {
 
-     Route::resource('orders', 'OrderController');
-    Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);
-    Route::get('orders/customer/{id}', ['as' => 'orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
-
     Route::resource('contacts', 'ContactController');
 
     Route::resource('customers/guests/contacts', 'Customer\Guest\ContactController');
@@ -40,8 +36,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('menus/items', 'Menu\ItemController');
     Route::resource('menus', 'MenuController');
 
+    Route::get('orders/{id}/items', 'Order\ItemController@byOrder');
     Route::resource('orders/items', 'Order\ItemController');
+    Route::get('orders/{id}/notes', 'Order\NoteController@byOrder');
     Route::resource('orders/notes', 'Order\NoteController');
+    Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);
+    Route::get('orders/customer/{id}', ['as' => 'orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
+    Route::get('orders/{id}/guests', 'OrderController@guests');
     Route::resource('orders', 'OrderController');
 
     Route::resource('recipes/ingredients', 'Recipe\IngredientController');
