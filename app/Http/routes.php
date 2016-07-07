@@ -11,8 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'Dashboard\DashboardController@getIndex');
+
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
+    Route::post('/login', 'AuthController@postLogin');
+    Route::get('/logout', 'AuthController@getLogout');
+    Route::get('/register', 'AuthController@getRegister');
+    Route::post('/register', 'AuthController@postRegister');
 });
 
 Route::group(['middleware' => ['auth']], function() {

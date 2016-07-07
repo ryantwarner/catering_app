@@ -1,17 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    @include('includes.head')
-</head>
-<body>
-<div class="container">
-
-    <div id="main" class="row">
-
+    <head>
+        @include('includes.head')
+    </head>
+    <body>        
+        @include('includes.header')
+        <main role="main">
             @yield('content')
-
-    </div>
-
-</div>
-</body>
+        </main>
+        @include('includes.footer')
+    </body>
 </html>

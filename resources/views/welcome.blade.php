@@ -1,45 +1,74 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.noauth')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('content')
+<style type="text/css">
+    body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+.form-signin {
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+}
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin-heading {
+    font-size:6em;
+    margin-bottom:60px;
+}
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
+</style>
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+            <form class="form-horizontal form-signin" method="POST" action="{{ URL::to('/') }}/auth/login">
+                <h1 class="form-signin-heading text-center">{{ trans("app.name") }}</h1>
+                {!! csrf_field() !!}
+
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="user_name">E-mail</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="email" name="email" id="email" value="{{ old('email') }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="password">Password</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="password" name="password" id="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="remember"> Remember Me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a class="btn btn-default" href="{{ URL::to('/') }}/auth/register">Register</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </body>
-</html>
+@endsection
