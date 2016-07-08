@@ -29,7 +29,7 @@ Notes:
 @empty
 <li>No notes</li>
 @endforelse
-<li><a href="{{ url('') }}">Add Note</a></li>
+<li><a href="{{ url('orders/' . $data->id . '/notes/create') }}">Add Note</a></li>
 </ul>
 
 <a href="{!! url('orders/'.$data->id.'/edit') !!}">Edit Order</a>

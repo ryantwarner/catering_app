@@ -9,19 +9,29 @@ use App\Http\Controllers\Controller;
 
 use App\Order\Note;
 
+use App\Traits\ResolvesResponse;
+
 class NoteController extends Controller
 {
-    public function store() {
-        $note = new Note(Input::all());
-        return response()->json($note->save());
+    use ResolvesResponse;
+    
+    public function store(Request $request) {
+        $note = new Note();
+        $request->merge(['order_id' => $request->id]);
+        if ($note->validate($request->input())) {
+            $saved_note = Note::create($request->input());
+            return $request->header('Accept') != 'application/json' ? redirect('orders/' . $request->id) : response()->json($saved_note);
+        } else {
+            return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($note->errors()) : response()->json($note->errors());
+        }
     }
     
     public function index() {
         return response()->json(Note::all());
     }
     
-    public function create() {
-        return response()->json(new Note());
+    public function create(Request $request) {
+        return $this->resolve_response($request, new Note(['order_id' => $request->id]));
     }
     
     public function destroy($id) {

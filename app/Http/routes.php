@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 //    Route::get('orders/{id}/items', 'Order\ItemController@byOrder');
     Route::resource('orders/{id}/items', 'Order\ItemController');
-    Route::get('orders/{id}/notes', 'Order\NoteController@byOrder');
-    Route::resource('orders/notes', 'Order\NoteController');
+//    Route::get('orders/{id}/notes', 'Order\NoteController@byOrder');
+    Route::resource('orders/{id}/notes', 'Order\NoteController');
     Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);
     Route::get('orders/customer/{id}', ['as' => 'orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
     Route::get('orders/{id}/guests', 'OrderController@guests');
