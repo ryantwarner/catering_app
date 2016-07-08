@@ -40,7 +40,7 @@ class CreateOrderTables extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
-            $table->integer('guest_id')->unsigned()->nullable();
+            $table->integer('guest_id')->unsigned();
             $table->integer('menu_item_id')->unsigned();
             $table->text('note')->nullable();
             

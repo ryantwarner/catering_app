@@ -15,9 +15,15 @@ class ItemController extends Controller
 {
     use ResolvesResponse;
     
-    public function store() {
-        $item = new Item(Input::all());
-        return response()->json($item->save());
+    public function store(Request $request) {
+        $item = new Item();
+        $request->merge(['order_id' => $request->id]);
+        if ($item->validate($request->input())) {
+            $saved_item = Item::create($request->input());
+            return $request->header('Accept') != 'application/json' ? redirect('orders/' . $request->id) : response()->json($saved_item);
+        } else {
+            return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($item->errors()) : response()->json($item->errors());
+        }
     }
     
     public function index() {
@@ -25,7 +31,7 @@ class ItemController extends Controller
     }
     
     public function create(Request $request) {
-        return $this->resolve_response($request, new Item());
+        return $this->resolve_response($request, new Item(['order_id' => $request->id]));
     }
     
     public function destroy($id) {

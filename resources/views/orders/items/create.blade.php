@@ -3,18 +3,18 @@
 @section('content')
 
 <h1>{{ trans("orders.edit") }}</h1>
-{!! Form::model($data, ['url' => 'orders/'.$data->id.'/items', 'method' => 'post']) !!}
+{!! Form::model($data, ['url' => 'orders/'.$data->order_id.'/items', 'method' => 'post']) !!}
 <div class="form-group">
-    {!! Form::label('customer_id', 'Customer') !!}
-    {!! Form::select('customer_id', collect('Select Customer')->merge(App\Customer::all()->lists('name', 'id')), $data->customer_id) !!}
+    {!! Form::label('guest_id', 'Guest') !!}
+    {!! Form::select('guest_id', $data->order()->with(['customer', 'customer.guests', 'customer.guests.contact', 'customer.guests.contact.contact'])->first()->customer->guests->lists('contact.contact.full_name', 'id'), $data->guest_id) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('status', 'Order Status') !!}
-    {!! Form::select('status', array(
-        'Select Status', 'open' => 'Open', 'closed' => 'Closed', 'cancelled' => 'Cancelled',
-        'in_progress' => 'In Progress', 'complete' => 'Complete', 'invoiced' => 'Invoiced',
-        'paid' => 'Paid', 'arrears' => 'Arrears'
-    ), $data->status) !!}
+    {!! Form::label('menu_item_id', 'Menu Item') !!}
+    {!! Form::select('menu_item_id', App\Menu\Item::all()->lists('name', 'id'), $data->menu_item_id) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('note', 'Notes') !!}
+    {!! Form::textarea('note', $data->note) !!}
 </div>
 {!! Form::submit() !!}
 {!! Form::close() !!}

@@ -183,7 +183,7 @@ $factory->define(App\Order\Note::class, function (Faker\Generator $faker) {
 $factory->define(App\Order\Item::class, function (Faker\Generator $faker) {
     return [
         'order_id' => App\Order::all()->random()->id,
-        'guest_id' => (rand(0, 1) ? NULL : App\Customer\Guest::all()->random()->id),
+        'guest_id' => App\Customer\Guest::all()->random()->id,
         'menu_item_id' => App\Menu\Item::all()->random()->id,
         'note' => $faker->sentence(),
         'created_by' => App\User::all()->random()->id
@@ -192,7 +192,7 @@ $factory->define(App\Order\Item::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Customer\Guest::class, function (Faker\Generator $faker) {
     return [
-        'customer_id' => (rand(0, 1) ? NULL : App\Customer::all()->random()->id),
+        'customer_id' => App\Customer::all()->random()->id,
         'note' => $faker->sentence(),
         'created_by' => App\User::all()->random()->id
     ];

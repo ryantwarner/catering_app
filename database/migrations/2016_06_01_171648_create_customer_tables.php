@@ -26,7 +26,7 @@ class CreateCustomerTables extends Migration
         
         Schema::create('guests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id')->unsigned()->nullable();
+            $table->integer('customer_id')->unsigned();
             $table->text('note');
             
             $table->integer('created_by')->unsigned();

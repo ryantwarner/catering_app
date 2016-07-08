@@ -20,4 +20,8 @@ class Contact extends Model
     public function customer() {
         return $this->belongsTo('App\Customer\Contact', 'contact_id', 'id');
     }
+    
+    public function getFullNameAttribute() {
+        return $this->first_name . " " . $this->last_name;
+    }
 }
