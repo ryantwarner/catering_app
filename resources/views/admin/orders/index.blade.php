@@ -1,8 +1,15 @@
-@extends('layouts.default')
+@extends('backend.layouts.master')
+
+@section('page-header')
+    <h1>
+        {{ app_name() }}
+        <small>{{ trans('strings.admin.orders.title') }}</small>
+    </h1>
+@endsection
 
 @section('content')
-
-<table>
+<a href="{{ url('admin/orders/create') }}" class="btn btn-primary">Create New Order</a>
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Customer</th>
@@ -24,6 +31,4 @@
         @endforelse
     </tbody>
 </table>
-<a href="{{ url('orders/create') }}">New</a>
-
 @endsection

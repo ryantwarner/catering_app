@@ -12,7 +12,11 @@ return [
     | found in a intuitive way.
     |
     */
-
+    'admin' => [
+        'orders' => [
+            'title' => 'Current Orders'
+        ]
+    ],
     'backend' => [
         'access' => [
             'users' => [

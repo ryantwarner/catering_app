@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         Model::reguard();
         
-        $this->call(UsersTableSeeder::class);
+//        $this->call(UsersTableSeeder::class);
         
         DB::table('item_types')->insert([
             ['name' => 'vegetable', 'created_by' => App\User::all()->random()->id], 
