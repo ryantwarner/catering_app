@@ -19,8 +19,8 @@
     <tbody>
         @forelse ($data as $d)
         <tr>
-            <td><a href="{{ url('orders/customer/' . $d->customer_id) }}">{{ $d->customer()->first()->name }}</a></td>
-            <td><a href="{{ url('orders/customer/' . $d->customer_id) }}">{{ $d->created_at }}</a></td>
+            <td><a href="{{ url('admin/orders/customer/' . $d->customer_id) }}">{{ $d->customer()->first()->name }}</a></td>
+            <td><a href="{{ url('admin/orders/customer/' . $d->customer_id) }}">{{ $d->created_at }}</a></td>
         </tr>
         @empty
         <tr>

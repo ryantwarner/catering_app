@@ -3,7 +3,7 @@
 @section('content')
 
 <h1>{{ trans("orders.edit") }}</h1>
-{!! Form::model($data, ['url' => 'orders/'.$data->id, 'method' => 'put']) !!}
+{!! Form::model($data, ['url' => 'admin/orders/'.$data->id, 'method' => 'put']) !!}
 <div class="form-group">
     {!! Form::label('customer_id', 'Customer') !!}
     {!! Form::select('customer_id', App\Customer::all()->lists('name', 'id'), $data->customer_id) !!}

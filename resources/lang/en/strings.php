@@ -14,7 +14,8 @@ return [
     */
     'admin' => [
         'orders' => [
-            'title' => 'Current Orders'
+            'title' => 'Current Orders',
+            'create' => 'Create'
         ]
     ],
     'backend' => [

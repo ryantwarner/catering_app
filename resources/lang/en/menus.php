@@ -45,6 +45,7 @@ return [
         'sidebar' => [
             'dashboard' => 'Dashboard',
             'general' => 'General',
+            'orders' => 'Orders'
         ],
     ],
 

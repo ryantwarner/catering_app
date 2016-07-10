@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Order;
+namespace App\Http\Controllers\Backend\Order;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class ItemController extends Controller
         $request->merge(['order_id' => $request->id]);
         if ($item->validate($request->input())) {
             $saved_item = Item::create($request->input());
-            return $request->header('Accept') != 'application/json' ? redirect('orders/' . $request->id) : response()->json($saved_item);
+            return $request->header('Accept') != 'application/json' ? redirect('admin/orders/' . $request->id) : response()->json($saved_item);
         } else {
             return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($item->errors()) : response()->json($item->errors());
         }

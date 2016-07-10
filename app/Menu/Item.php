@@ -16,4 +16,8 @@ class Item extends Model
     public function menu() {
         return $this->belongsTo('App\Menu', 'menu_id', 'id');
     }
+    
+    public function getNamePriceAttribute() {
+        return $this->name . " - $" . $this->price;
+    }
 }

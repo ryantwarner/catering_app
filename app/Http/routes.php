@@ -24,6 +24,9 @@ Route::group(['middleware' => 'web'], function() {
  * Admin middleware groups web, auth, and routeNeedsPermission
  */
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
+    Route::get('orders/customer/{id}', ['as' => 'admin.orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
+    Route::resource('orders/{id}/items', 'Order\ItemController');
+    Route::resource('orders/{id}/notes', 'Order\NoteController');
     Route::resource('orders', 'OrderController');
     /**
      * These routes need view-backend permission

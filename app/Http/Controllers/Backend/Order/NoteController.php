@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Order;
+namespace App\Http\Controllers\Backend\Order;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class NoteController extends Controller
         $request->merge(['order_id' => $request->id]);
         if ($note->validate($request->input())) {
             $saved_note = Note::create($request->input());
-            return $request->header('Accept') != 'application/json' ? redirect('orders/' . $request->id) : response()->json($saved_note);
+            return $request->header('Accept') != 'application/json' ? redirect('admin/orders/' . $request->id) : response()->json($saved_note);
         } else {
             return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($note->errors()) : response()->json($note->errors());
         }

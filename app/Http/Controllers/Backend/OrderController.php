@@ -22,7 +22,7 @@ class OrderController extends Controller
         $order = new Order();
         if ($order->validate($request->input())) {
             $saved_order = Order::create($request->input());
-            return $request->header('Accept') != 'application/json' ? redirect('orders/' . $saved_order->id) : response()->json($saved_order);
+            return $request->header('Accept') != 'application/json' ? redirect('admin/orders/' . $saved_order->id) : response()->json($saved_order);
         } else {
             return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($order->errors()) : response()->json($order->errors());
         }
