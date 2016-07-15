@@ -13,6 +13,7 @@
     <thead>
         <tr>
             <th width='1%'></th>
+            <th>Name</th>
             <th>Event Date</th>
             <th>Status</th>
             <th>Items</th>
@@ -24,6 +25,7 @@
         @forelse ($data['events'] as $d)
         <tr>
             <td>{!! Form::checkbox('delete[]', $d->id) !!}</td>
+            <td><a href="{{ url('admin/events/' . $d->id) }}">{{ $d->name }}</a></td>
             <td><a href="{{ url('admin/events/' . $d->id) }}">{{ $d->created_at }}</a></td>
             <td><a href="{{ url('admin/events/' . $d->id) }}">{{ $d->status }}</a></td>
             <td><a href="{{ url('admin/events/' . $d->id . "/items") }}">{{ count($d->items) }}</a></td>

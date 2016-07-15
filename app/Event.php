@@ -14,10 +14,11 @@ class Event extends Model
     
     protected $table = "events";
        
-    protected $fillable = ['customer_id', 'status', 'created_by'];
+    protected $fillable = ['customer_id', 'name', 'status', 'created_by'];
     
     protected $rules = [
         'customer_id' => 'required|integer',
+        'name' => 'required',
         'status' => 'required|in:open,closed,cancelled,in_progress,complete,invoiced,paid,arrears',
         'created_by' => 'required|integer'
     ];

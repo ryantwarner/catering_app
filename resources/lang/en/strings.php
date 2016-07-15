@@ -13,8 +13,8 @@ return [
     |
     */
     'admin' => [
-        'orders' => [
-            'title' => 'Current Orders',
+        'events' => [
+            'title' => 'Current Events',
             'create' => 'Create'
         ]
     ],

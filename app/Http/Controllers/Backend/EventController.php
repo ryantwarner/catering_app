@@ -41,7 +41,7 @@ class EventController extends Controller
     }
     
     public function create(Request $request) {
-        return $this->resolve_response($request, new Event());
+        return $this->resolve_response($request, new Event(["customer_id" => !empty($request->id) ? $request->id : null]));
     }
     
     public function destroy(Request $request, $id) {

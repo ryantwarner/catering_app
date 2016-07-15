@@ -8,8 +8,8 @@
 @endsection
 
 @section('content')
-<a href="{{ url('admin/events/create') }}" class="btn btn-primary">Create New Event</a>
-<table class="table table-bevented table-striped">
+<div class="box">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Customer</th>
@@ -25,10 +25,15 @@
         @empty
         <tr>
             <td colspan='2'>
-                is empty
+                There are no customers who have any events. Make some?
             </td>
         </tr>
         @endforelse
     </tbody>
 </table>
+</div>
+<div class='container'>
+    <a href="{{ url('admin/events/create') }}" class="btn btn-primary pull-right">Create New Event</a>
+</div>
+
 @endsection

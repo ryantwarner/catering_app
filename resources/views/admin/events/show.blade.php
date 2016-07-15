@@ -10,37 +10,92 @@
 @section('content')
 
 <h1>{{ trans("events.show") }}</h1>
-
-Customer: {!! App\Customer::find($data->customer_id)->name !!}<br />
-Status: {!! $data->status !!}<br />
-<br />
-Items:
-<ul>
-@forelse ($data->items as $item)
-<li>
-    {{ !is_null($item->guest) ? $item->guest->contact->contact->first_name . " " .$item->guest->contact->contact->last_name : '' }}<br />
-    {{ $item->menu_item->name . ' - $' . $item->menu_item->price }}<br />
-    {{ $item->menu_item->description }}
-    {{ $item->note }}
-</li>
-@empty
-<li>No items</li>
-@endforelse
-<li><a class='btn btn-default' href="{{ url('admin/events/' . $data->id . "/items/create") }}">Add Item</a></li>
-</ul>
-Notes:
-<ul>
-@forelse ($data->notes as $note)
-<li>
-    {{ $note->note }}
-</li>
-@empty
-<li>No notes</li>
-@endforelse
-<li><a class='btn btn-default' href="{{ url('admin/events/' . $data->id . '/notes/create') }}">Add Note</a></li>
-</ul>
-
-<a class='btn btn-primary' href="{!! url('admin/events/'.$data->id.'/edit') !!}">Edit Event</a>
+<div class="box box-success">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-sm-2"><strong>Customer:</strong></div>
+            <div class="col-sm-4">{!! App\Customer::find($data->customer_id)->name !!}</div>
+            <div class="col-sm-2"><strong>Status:</strong></div>
+            <div class="col-sm-4">{!! $data->status !!}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><strong>Event Name:</strong></div>
+            <div class="col-sm-10">{!! $data->name !!}</div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <a class='pull-right btn btn-xs btn-primary' href="{!! url('admin/events/'.$data->id.'/edit') !!}">Edit Event</a>
+    </div>
+</div>
+<h2>Items:</h2>
+<div class="box box-success">
+    <div class="box-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="1%"></th>
+                    <th>Guest</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($data->items as $item)
+                <?php $url = "admin/events/".$data->id."/items/".$item->id."/edit"; ?>
+                <tr>
+                    <td>{{ Form::checkbox('delete[]', $item->id) }}
+                    <td><a href="{{ url($url) }}">{{ !is_null($item->guest) ? $item->guest->contact->contact->first_name . " " .$item->guest->contact->contact->last_name : '' }}</a></td>
+                    <td><a href="{{ url($url) }}">{{ $item->menu_item->name }}</a></td>
+                    <td><a href="{{ url($url) }}">{{ '$' . $item->menu_item->price }}</a></td>
+                    <td><a href="{{ url($url) }}">{{ $item->menu_item->description }}</a></td>
+                    <td><a href="{{ url($url) }}">{{ $item->note }}</a></td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6">No items, add some?</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer">
+        {{ Form::submit('Delete', ['class' => 'pull-left btn btn-xs btn-danger']) }}
+        <a class='pull-right btn btn-xs btn-success' href="{{ url('admin/events/' . $data->id . "/items/create") }}">Add Item</a>
+    </div>
+</div>
+<h2>Notes</h2>
+<div class="box box-success">
+    <div class="box-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="1%"></th>
+                    <th>Note</th>
+                    <th width="15%">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($data->notes as $note)
+                <tr>
+                    <td>{{ Form::checkbox('delete[]', $note->id) }}
+                    <td>{{ $note->note }}</td>
+                    <td>{{ $note->created_at }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3">No notes</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer">
+        {{ Form::submit('Delete', ['class' => 'pull-left btn btn-xs btn-danger']) }}
+        <a class='pull-right btn btn-xs btn-success' href="{{ url('admin/events/' . $data->id . "/items/create") }}">Add Note</a>
+    </div>
+</div>
 
 
 @endsection

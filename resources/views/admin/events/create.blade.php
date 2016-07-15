@@ -10,20 +10,33 @@
 @section('content')
 
 <h1>{{ trans("strings.admin.events.create") }}</h1>
-{!! Form::model($data, ['url' => 'admin/events/'.$data->id, 'method' => 'post']) !!}
+{!! Form::model($data, ['url' => 'admin/events/'.$data->id, 'method' => 'post', 'class' => 'form-horizontal']) !!}
 <div class="form-group">
-    {!! Form::label('customer_id', 'Customer') !!}
-    {!! Form::select('customer_id', collect('Select Customer')->merge(App\Customer::all()->lists('name', 'id')), $data->customer_id) !!}
+    {!! Form::label('customer_id', 'Customer', ['class' => 'col-sm-2 control-label']) !!}
+    <div class='col-sm-10'>
+        {!! Form::select('customer_id', collect('Select Customer')->merge(App\Customer::all()->lists('name', 'id')), $data->customer_id, ['class' => 'form-control']) !!}
+    </div>
 </div>
 <div class="form-group">
-    {!! Form::label('status', 'Event Status') !!}
+    {!! Form::label('name', 'Event Name', ['class' => 'col-sm-2 control-label']) !!}
+    <div class='col-sm-10'>
+        {!! Form::text('name', $data->name, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('status', 'Event Status', ['class' => 'col-sm-2 control-label']) !!}
+    <div class='col-sm-10'>
     {!! Form::select('status', array(
         'Select Status', 'open' => 'Open', 'closed' => 'Closed', 'cancelled' => 'Cancelled',
         'in_progress' => 'In Progress', 'complete' => 'Complete', 'invoiced' => 'Invoiced',
         'paid' => 'Paid', 'arrears' => 'Arrears'
-    ), $data->status) !!}
+    ), $data->status, ['class' => 'form-control']) !!}
+    </div>
 </div>
-{!! Form::submit() !!}
+<div class="row-fluid">
+    <a href='{{ URL::previous() }}' class='pull-left btn btn-default'>Back</a>
+{!! Form::submit('Create', ['class' => 'pull-right btn btn-primary']) !!}
+</div>
 {!! Form::close() !!}
 
 @endsection
