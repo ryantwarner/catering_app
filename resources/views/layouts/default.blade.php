@@ -6,13 +6,10 @@
     <body>
         <a href="{{ url('/') }}">Home</a>
         @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            @include('includes.errors')
+        @endif
+        @if (count($successes) > 0)
+            @include('includes.success')
         @endif
         @include('includes.header')
         <main role="main">

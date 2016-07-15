@@ -37,7 +37,7 @@ class OrderController extends Controller
     }
     
     public function byCustomer(Request $request) {
-        return $this->resolve_response($request, Order::where(['customer_id' => $request->id])->with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->get());
+        return $this->resolve_response($request, collect(['id' => $request->id, 'orders' => Order::where(['customer_id' => $request->id])->with(['items', 'items.menu_item', 'items.guest', 'items.guest.contact.contact', 'notes'])->get()]));
     }
     
     public function create(Request $request) {
@@ -45,7 +45,15 @@ class OrderController extends Controller
     }
     
     public function destroy(Request $request, $id) {
-        return response()->json(Order::findOrFail($id)->delete());
+        if (empty($request->delete)) {
+            return $this->resolve_response(Order::findOrFail($id)->delete());
+        } else {
+            $deleted = [];
+            foreach ($request->delete as $key => $delete) {
+                $deleted[$delete] = Order::findOrFail($delete)->delete();
+            }
+            return $request->header('Accept') == 'application/json' ? response()->json($deleted) : redirect()->back()->withInput()->withSuccess("Successfully deleted ".count($delete)." orders");
+        }
     }
     
     public function update(Request $request, $id) {
