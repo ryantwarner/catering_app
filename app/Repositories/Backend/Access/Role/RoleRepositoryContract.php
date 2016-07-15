@@ -26,12 +26,12 @@ interface RoleRepositoryContract
     public function getForDataTable();
 
     /**
-     * @param  string  $event_by
+     * @param  string  $order_by
      * @param  string  $sort
      * @param  bool    $withPermissions
      * @return mixed
      */
-    public function getAllRoles($event_by = 'id', $sort = 'asc', $withPermissions = false);
+    public function getAllRoles($order_by = 'id', $sort = 'asc', $withPermissions = false);
 
     /**
      * @param  $input
