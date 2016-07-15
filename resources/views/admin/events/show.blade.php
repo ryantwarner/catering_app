@@ -3,13 +3,13 @@
 @section('page-header')
     <h1>
         {{ app_name() }}
-        <small>{{ trans('strings.admin.orders.title') }}</small>
+        <small>{{ trans('strings.admin.events.title') }}</small>
     </h1>
 @endsection
 
 @section('content')
 
-<h1>{{ trans("orders.show") }}</h1>
+<h1>{{ trans("events.show") }}</h1>
 
 Customer: {!! App\Customer::find($data->customer_id)->name !!}<br />
 Status: {!! $data->status !!}<br />
@@ -26,7 +26,7 @@ Items:
 @empty
 <li>No items</li>
 @endforelse
-<li><a class='btn btn-default' href="{{ url('admin/orders/' . $data->id . "/items/create") }}">Add Item</a></li>
+<li><a class='btn btn-default' href="{{ url('admin/events/' . $data->id . "/items/create") }}">Add Item</a></li>
 </ul>
 Notes:
 <ul>
@@ -37,10 +37,10 @@ Notes:
 @empty
 <li>No notes</li>
 @endforelse
-<li><a class='btn btn-default' href="{{ url('admin/orders/' . $data->id . '/notes/create') }}">Add Note</a></li>
+<li><a class='btn btn-default' href="{{ url('admin/events/' . $data->id . '/notes/create') }}">Add Note</a></li>
 </ul>
 
-<a class='btn btn-primary' href="{!! url('admin/orders/'.$data->id.'/edit') !!}">Edit Order</a>
+<a class='btn btn-primary' href="{!! url('admin/events/'.$data->id.'/edit') !!}">Edit Event</a>
 
 
 @endsection

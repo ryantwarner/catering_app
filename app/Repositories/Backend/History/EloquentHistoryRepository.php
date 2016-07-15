@@ -172,7 +172,7 @@ class EloquentHistoryRepository implements HistoryContract {
 
 				'<div class="timeline-item">'.
                 '<span class="time"><i class="fa fa-clock-o"></i> '.$history->created_at->diffForHumans().'</span>'.
-				'<h3 class="timeline-header no-border"><strong>'.$history->user->name.'</strong> '.$this->renderDescription($history->text, $history->assets).'</h3>'.
+				'<h3 class="timeline-header no-bevent"><strong>'.$history->user->name.'</strong> '.$this->renderDescription($history->text, $history->assets).'</h3>'.
               '</div>'.
             '</li>';
 	}

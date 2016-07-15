@@ -3,17 +3,17 @@
 @section('page-header')
     <h1>
         {{ app_name() }}
-        <small>{{ trans('strings.admin.orders.title') }}</small>
+        <small>{{ trans('strings.admin.events.title') }}</small>
     </h1>
 @endsection
 
 @section('content')
 
-<h1>{{ trans("orders.edit") }}</h1>
-{!! Form::model($data, ['url' => 'admin/orders/'.$data->order_id.'/items', 'method' => 'post']) !!}
+<h1>{{ trans("events.edit") }}</h1>
+{!! Form::model($data, ['url' => 'admin/events/'.$data->event_id.'/items', 'method' => 'post']) !!}
 <div class="form-group">
     {!! Form::label('guest_id', 'Guest') !!}
-    {!! Form::select('guest_id', $data->order()->with(['customer', 'customer.guests', 'customer.guests.contact', 'customer.guests.contact.contact'])->first()->customer->guests->lists('contact.contact.full_name', 'id'), $data->guest_id) !!}
+    {!! Form::select('guest_id', $data->event()->with(['customer', 'customer.guests', 'customer.guests.contact', 'customer.guests.contact.contact'])->first()->customer->guests->lists('contact.contact.full_name', 'id'), $data->guest_id) !!}
 </div>
 <div class="form-group">
     {!! Form::label('menu_item_id', 'Menu Item') !!}

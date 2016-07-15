@@ -134,7 +134,7 @@ $factory->define(App\Recipe\Instruction::class, function (Faker\Generator $faker
     return [
         'recipe_id' => App\Recipe::all()->random()->id,
         'instruction' => $faker->text,
-        'order' => rand(0, 10),
+        'event' => rand(0, 10),
         'created_by' => App\User::all()->random()->id
     ];
 });
@@ -164,25 +164,26 @@ $factory->define(App\Recipe\Nutrition::class, function (Faker\Generator $faker) 
     ];
 });
 
-$factory->define(App\Order::class, function (Faker\Generator $faker) {
+$factory->define(App\Event::class, function (Faker\Generator $faker) {
     return [
         'customer_id' => App\Customer::all()->random()->id,
+        'name' => $faker->text,
         'status' => $faker->randomElement(['open','closed','cancelled','in_progress','complete','invoiced','paid','arrears']),
         'created_by' => App\User::all()->random()->id
     ];
 });
 
-$factory->define(App\Order\Note::class, function (Faker\Generator $faker) {
+$factory->define(App\Event\Note::class, function (Faker\Generator $faker) {
     return [
-        'order_id' => App\Order::all()->random()->id,
+        'event_id' => App\Event::all()->random()->id,
         'note' => $faker->sentence(),
         'created_by' => App\User::all()->random()->id
     ];
 });
 
-$factory->define(App\Order\Item::class, function (Faker\Generator $faker) {
+$factory->define(App\Event\Item::class, function (Faker\Generator $faker) {
     return [
-        'order_id' => App\Order::all()->random()->id,
+        'event_id' => App\Event::all()->random()->id,
         'guest_id' => App\Customer\Guest::all()->random()->id,
         'menu_item_id' => App\Menu\Item::all()->random()->id,
         'note' => $faker->sentence(),

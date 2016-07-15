@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Order;
+namespace App\Http\Controllers\Backend\Event;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Order\Item;
+use App\Event\Item;
 
 use App\Traits\ResolvesResponse;
 
@@ -17,10 +17,10 @@ class ItemController extends Controller
     
     public function store(Request $request) {
         $item = new Item();
-        $request->merge(['order_id' => $request->id]);
+        $request->merge(['event_id' => $request->id]);
         if ($item->validate($request->input())) {
             $saved_item = Item::create($request->input());
-            return $request->header('Accept') != 'application/json' ? redirect('admin/orders/' . $request->id) : response()->json($saved_item);
+            return $request->header('Accept') != 'application/json' ? redirect('admin/events/' . $request->id) : response()->json($saved_item);
         } else {
             return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($item->errors()) : response()->json($item->errors());
         }
@@ -31,7 +31,7 @@ class ItemController extends Controller
     }
     
     public function create(Request $request) {
-        return $this->resolve_response($request, new Item(['order_id' => $request->id]));
+        return $this->resolve_response($request, new Item(['event_id' => $request->id]));
     }
     
     public function destroy($id) {
@@ -50,7 +50,7 @@ class ItemController extends Controller
         return response()->json(Item::findOrFail($id));
     }
     
-    public function byOrder(Request $request) {
-        return $this->resolve_response($request, Item::where('order_id', $request->id)->get());
+    public function byEvent(Request $request) {
+        return $this->resolve_response($request, Item::where('event_id', $request->id)->get());
     }
 }

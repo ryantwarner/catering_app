@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Order;
+namespace App\Event;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,17 +12,17 @@ class Note extends Model
 {
     use SoftDeletes, Owner, ModelValidates;
     
-    protected $table = "order_notes";
+    protected $table = "event_notes";
     
-    protected $fillable = ['order_id', 'note', 'created_by'];
+    protected $fillable = ['event_id', 'note', 'created_by'];
     
     protected $rules = [
-        'order_id' => 'required|exists:orders,id',
+        'event_id' => 'required|exists:events,id',
         'note' => 'required',
         'created_by' => 'required|exists:users,id'
     ];
     
-    public function order() {
-        return $this->belongsTo('App\Order', 'order_id', 'id');
+    public function event() {
+        return $this->belongsTo('App\Event', 'event_id', 'id');
     }
 }

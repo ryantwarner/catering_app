@@ -49,20 +49,20 @@ class EloquentRoleRepository implements RoleRepositoryContract
     }
 
     /**
-     * @param  string  $order_by
+     * @param  string  $event_by
      * @param  string  $sort
      * @param  bool    $withPermissions
      * @return mixed
      */
-    public function getAllRoles($order_by = 'sort', $sort = 'asc', $withPermissions = false)
+    public function getAllRoles($event_by = 'sort', $sort = 'asc', $withPermissions = false)
     {
         if ($withPermissions) {
             return Role::with('permissions')
-                ->orderBy($order_by, $sort)
+                ->eventBy($event_by, $sort)
                 ->get();
         }
 
-        return Role::orderBy($order_by, $sort)
+        return Role::eventBy($event_by, $sort)
             ->get();
     }
 

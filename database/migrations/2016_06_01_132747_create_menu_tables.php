@@ -79,7 +79,7 @@ class CreateMenuTables extends Migration
             $table->increments('id');
             $table->integer('recipe_id')->unsigned();
             $table->text('instruction');
-            $table->integer('order');
+            $table->integer('event');
             $table->boolean('active')->default(true);
             $table->integer('created_by')->unsigned();
             $table->timestamps();

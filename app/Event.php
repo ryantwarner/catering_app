@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Owner;
 use App\Traits\ModelValidates;
 
-class Order extends Model
+class Event extends Model
 {
     use SoftDeletes, Owner, ModelValidates;
     
-    protected $table = "orders";
+    protected $table = "events";
        
     protected $fillable = ['customer_id', 'status', 'created_by'];
     
@@ -23,11 +23,11 @@ class Order extends Model
     ];
     
     public function items() {
-        return $this->hasMany('App\Order\Item', 'order_id', 'id');
+        return $this->hasMany('App\Event\Item', 'event_id', 'id');
     }
     
     public function notes() {
-        return $this->hasMany('App\Order\Note', 'order_id', 'id');
+        return $this->hasMany('App\Event\Note', 'event_id', 'id');
     }
     
     public function customer() {

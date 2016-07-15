@@ -24,10 +24,11 @@ Route::group(['middleware' => 'web'], function() {
  * Admin middleware groups web, auth, and routeNeedsPermission
  */
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
-    Route::get('orders/customer/{id}', ['as' => 'admin.orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
-    Route::resource('orders/{id}/items', 'Order\ItemController');
-    Route::resource('orders/{id}/notes', 'Order\NoteController');
-    Route::resource('orders', 'OrderController');
+    Route::get('events/customer/{id}', ['as' => 'admin.events.bycustomer', 'uses' => 'EventController@byCustomer']);
+    Route::get('events/customer/{id}/create', ['as' => 'admin.events.bycustomer.create', 'uses' => 'EventController@create']);
+    Route::resource('events/{id}/items', 'Event\ItemController');
+    Route::resource('events/{id}/notes', 'Event\NoteController');
+    Route::resource('events', 'EventController');
     /**
      * These routes need view-backend permission
      * (good if you want to allow more than one group in the backend,
@@ -67,14 +68,14 @@ Route::group(['middleware' => ['auth', 'web']], function() {
     Route::resource('menus/items', 'Menu\ItemController');
     Route::resource('menus', 'MenuController');
 
-//    Route::get('orders/{id}/items', 'Order\ItemController@byOrder');
-    Route::resource('orders/{id}/items', 'Order\ItemController');
-//    Route::get('orders/{id}/notes', 'Order\NoteController@byOrder');
-    Route::resource('orders/{id}/notes', 'Order\NoteController');
-    Route::get('orders/status/{status}', ['as' => 'orders.bystatus', 'uses' => 'OrderController@byStatus']);
-    Route::get('orders/customer/{id}', ['as' => 'orders.bycustomer', 'uses' => 'OrderController@byCustomer']);
-    Route::get('orders/{id}/guests', 'OrderController@guests');
-//    Route::resource('orders', 'OrderController');
+//    Route::get('events/{id}/items', 'Event\ItemController@byEvent');
+    Route::resource('events/{id}/items', 'Event\ItemController');
+//    Route::get('events/{id}/notes', 'Event\NoteController@byEvent');
+    Route::resource('events/{id}/notes', 'Event\NoteController');
+    Route::get('events/status/{status}', ['as' => 'events.bystatus', 'uses' => 'EventController@byStatus']);
+    Route::get('events/customer/{id}', ['as' => 'events.bycustomer', 'uses' => 'EventController@byCustomer']);
+    Route::get('events/{id}/guests', 'EventController@guests');
+//    Route::resource('events', 'EventController');
 
     Route::resource('recipes/ingredients', 'Recipe\IngredientController');
     Route::resource('recipes/instructions', 'Recipe\InstructionController');

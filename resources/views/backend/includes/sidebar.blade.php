@@ -34,8 +34,8 @@
                 {{ link_to_route('admin.dashboard', trans('menus.backend.sidebar.dashboard')) }}
             </li>
 
-            <li class="{{ Active::pattern('admin/orders') }}">
-                {{ link_to_route('admin.orders.index', trans('menus.backend.sidebar.orders')) }}
+            <li class="{{ Active::pattern('admin/events') }}">
+                {{ link_to_route('admin.events.index', trans('menus.backend.sidebar.events')) }}
             </li>
             
             @permission('manage-users')

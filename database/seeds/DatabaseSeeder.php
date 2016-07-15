@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(GuestSeeder::class);
-        $this->call(OrderSeeder::class);
+        $this->call(EventSeeder::class);
         
     }
 }

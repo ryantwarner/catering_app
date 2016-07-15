@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Order;
+namespace App\Http\Controllers\Backend\Event;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Order\Note;
+use App\Event\Note;
 
 use App\Traits\ResolvesResponse;
 
@@ -17,10 +17,10 @@ class NoteController extends Controller
     
     public function store(Request $request) {
         $note = new Note();
-        $request->merge(['order_id' => $request->id]);
+        $request->merge(['event_id' => $request->id]);
         if ($note->validate($request->input())) {
             $saved_note = Note::create($request->input());
-            return $request->header('Accept') != 'application/json' ? redirect('admin/orders/' . $request->id) : response()->json($saved_note);
+            return $request->header('Accept') != 'application/json' ? redirect('admin/events/' . $request->id) : response()->json($saved_note);
         } else {
             return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($note->errors()) : response()->json($note->errors());
         }
@@ -31,7 +31,7 @@ class NoteController extends Controller
     }
     
     public function create(Request $request) {
-        return $this->resolve_response($request, new Note(['order_id' => $request->id]));
+        return $this->resolve_response($request, new Note(['event_id' => $request->id]));
     }
     
     public function destroy($id) {
