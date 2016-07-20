@@ -35,7 +35,7 @@
 </div>
 <div class="row-fluid">
     <a href='{{ URL::previous() }}' class='pull-left btn btn-default'>Back</a>
-{!! Form::submit('Create', ['class' => 'pull-right btn btn-primary']) !!}
+    {!! Form::submit('Create', ['class' => 'pull-right btn btn-primary']) !!}
 </div>
 {!! Form::close() !!}
 

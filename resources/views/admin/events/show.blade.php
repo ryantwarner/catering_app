@@ -10,6 +10,7 @@
 @section('content')
 
 <h1>{{ trans("events.show") }}</h1>
+{{ Form::open(['url' => 'admin/events/'.$data->id, 'method' => 'delete']) }}
 <div class="box box-success">
     <div class="box-body">
         <div class="row">
@@ -24,10 +25,13 @@
         </div>
     </div>
     <div class="box-footer">
+        {{ Form::submit('Delete This Event', ['class' => 'pull-left btn btn-xs btn-danger']) }}
         <a class='pull-right btn btn-xs btn-primary' href="{!! url('admin/events/'.$data->id.'/edit') !!}">Edit Event</a>
     </div>
 </div>
+{{ Form::close() }}
 <h2>Items:</h2>
+{{ Form::open(['url' => 'admin/events/'.$data->id.'/items/', 'method' => 'delete']) }}
 <div class="box box-success">
     <div class="box-body">
         <table class="table table-bordered table-striped">
@@ -65,6 +69,8 @@
         <a class='pull-right btn btn-xs btn-success' href="{{ url('admin/events/' . $data->id . "/items/create") }}">Add Item</a>
     </div>
 </div>
+{{ Form::close() }}
+{{ Form::open(['url' => 'admin/events/'.$data->id.'/notes/', 'method' => 'delete']) }}
 <h2>Notes</h2>
 <div class="box box-success">
     <div class="box-body">

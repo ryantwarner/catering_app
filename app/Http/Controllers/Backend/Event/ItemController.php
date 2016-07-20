@@ -34,20 +34,35 @@ class ItemController extends Controller
         return $this->resolve_response($request, new Item(['event_id' => $request->id]));
     }
     
-    public function destroy($id) {
-        return response()->json(Item::findOrFail($id)->delete());
+    public function destroy(Request $request, $id) {
+         if (empty($request->delete)) {
+            return $this->resolve_response(Item::findOrFail($id)->delete());
+        } else {
+            $deleted = [];
+            foreach ($request->delete as $key => $delete) {
+                $deleted[$delete] = Item::findOrFail($delete)->delete();
+            }
+            return $request->header('Accept') == 'application/json' ? response()->json($deleted) : redirect()->back()->withInput()->withSuccess(["Successfully deleted ".count($delete)." events"]);
+        }
     }
     
-    public function update($id) {
-        return response()->json(Item::findOrFail($id)->update(Input::all()));
+    public function update(Request $request, $id, $items) {
+        $event_item = Item::findOrFail($items);
+        $request->merge(['event_id' => $id]);
+        if ($event_item->validate($request->input())) {
+            $result = $event_item->update($request->input());
+            return $request->header('Accept') != 'application/json' ? redirect('admin/events/' . $id . "/items/" . $items . "/edit") : response()->json($result);
+        } else {
+            return $request->header('Accept') != 'application/json' ? redirect()->back()->withInput()->withErrors($event_item->errors()) :response()->json($event_item->errors());
+        }
     }
     
-    public function show($id) {
-        return response()->json(Item::findOrFail($id));
+    public function show(Request $request, $id, $items) {
+        return $this->resolve_response($request, Item::findOrFail($items));
     }
     
-    public function edit($id) {
-        return response()->json(Item::findOrFail($id));
+    public function edit(Request $request, $id, $items) {
+        return $this->resolve_response($request, Item::findOrFail($items));
     }
     
     public function byEvent(Request $request) {

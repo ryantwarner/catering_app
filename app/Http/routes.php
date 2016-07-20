@@ -27,7 +27,10 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'ad
     Route::get('events/customer/{id}', ['as' => 'admin.events.bycustomer', 'uses' => 'EventController@byCustomer']);
     Route::get('events/customer/{id}/create', ['as' => 'admin.events.bycustomer.create', 'uses' => 'EventController@create']);
     Route::resource('events/{id}/items', 'Event\ItemController');
+    Route::delete('events/{id}/items/{items?}', ['as' => 'admin.events.{id}.items.destroy', 'uses' => 'Event\ItemController@destroy']);
+    
     Route::resource('events/{id}/notes', 'Event\NoteController');
+    Route::delete('events/{id}/notes/{notes?}', ['as' => 'admin.events.{id}.notes.destroy', 'uses' => 'Event\NoteController@destroy']);
     Route::resource('events', 'EventController');
     /**
      * These routes need view-backend permission

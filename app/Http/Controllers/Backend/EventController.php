@@ -46,7 +46,9 @@ class EventController extends Controller
     
     public function destroy(Request $request, $id) {
         if (empty($request->delete)) {
-            return $this->resolve_response(Event::findOrFail($id)->delete());
+            $event = Event::findOrFail($id);
+            $url = 'admin/events/customer/'.$event->customer_id;
+            return $request->header('Accept') == 'application/json' ? response()->json($event->delete()) : redirect($url);
         } else {
             $deleted = [];
             foreach ($request->delete as $key => $delete) {

@@ -11,10 +11,10 @@
 
 <div class='box box-success'>
     <div class='box-header'>
-        <h1>{{ trans("events.items.add") }}</h1>
+        <h1>{{ trans("events.items.edit") }}</h1>
     </div>
     <div class='box-body'>
-        {!! Form::model($data, ['url' => 'admin/events/'.$data->event_id.'/items', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+        {!! Form::model($data, ['url' => 'admin/events/'.$data->event_id.'/items/'.$data->id, 'method' => 'put', 'class' => 'form-horizontal']) !!}
         <div class="form-group">
             {!! Form::label('guest_id', 'Guest', ['class' => 'col-sm-2 control-label']) !!}
             <div class='col-sm-10'>
@@ -35,8 +35,8 @@
         </div>
     </div>
     <div class='box-footer'>
-        <a href='{{ URL::previous() }}' class='pull-left btn btn-default btn-xs'>Back</a>
-        {!! Form::submit('Add', ['class' => 'pull-right btn btn-primary btn-xs']) !!}
+        <a href='{{ url ('admin/events/'.$data->event_id) }}' class='pull-left btn btn-default btn-xs'>Back</a>
+        {!! Form::submit('Save', ['class' => 'pull-right btn btn-primary btn-xs']) !!}
     </div>
 </div>
 

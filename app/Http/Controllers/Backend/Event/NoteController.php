@@ -34,8 +34,16 @@ class NoteController extends Controller
         return $this->resolve_response($request, new Note(['event_id' => $request->id]));
     }
     
-    public function destroy($id) {
-        return response()->json(Note::findOrFail($id)->delete());
+    public function destroy(Request $request, $id) {
+         if (empty($request->delete)) {
+            return $this->resolve_response(Note::findOrFail($id)->delete());
+        } else {
+            $deleted = [];
+            foreach ($request->delete as $key => $delete) {
+                $deleted[$delete] = Note::findOrFail($delete)->delete();
+            }
+            return $request->header('Accept') == 'application/json' ? response()->json($deleted) : redirect()->back()->withInput()->withSuccess(["Successfully deleted ".count($delete)." notes"]);
+        }
     }
     
     public function update($id) {
